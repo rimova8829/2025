@@ -1,0 +1,48 @@
+<templates>
+
+    <t t-name="HrAttendanceLunchGreetingMessage">
+        <div class="o_hr_attendance_kiosk_mode_container o_home_menu_background">
+            <span class="o_hr_attendance_kiosk_backdrop"/>
+            <div class="o_hr_attendance_clock text-center"/>
+            <div class="o_hr_attendance_kiosk_mode">
+                <t t-if="widget.attendance">
+                    <div class="o_hr_attendance_user_badge o_home_menu_background">
+                        <img class="img rounded-circle" t-attf-src="/web/image?model=hr.employee.public&amp;field=image_128&amp;id=#{widget.attendance.employee_id[0]}" t-att-title="widget.employee_name" t-att-alt="widget.employee_name"/>
+                    </div>
+                    <t t-if="widget.emp_data.attendance_state == 'lunch_start'">
+                        <h1 class="mb0">Lunch End <t t-esc="widget.employee_name"/>!</h1>
+                        <h2 class="o_hr_attendance_message_message mt4 mb24"/>
+                        <div class="alert alert-info h2 mt0" role="status">
+                            Lunch End at <b><t t-esc="widget.attendance.lunch_end_time"/></b>
+                        </div>
+                        <h3 class="o_hr_attendance_random_message mb24"/>
+                        <div class="o_hr_attendance_warning_message mt24 alert alert-warning" style="display:none" role="alert"/>
+                    </t>
+                    <t t-else="">
+                        <h1 class="mb0">Lunch Start <t t-esc="widget.employee_name"/>!</h1>
+                        <h2 class="o_hr_attendance_message_message mt4 mb24"/>
+                        <div class="alert alert-info h2 mt0" role="status">
+                            Lunch Start at <b><t t-esc="widget.attendance.lunch_start_time"/></b>
+                        </div>
+                        <h3 class="o_hr_attendance_random_message mb24"/>
+                        <div class="o_hr_attendance_warning_message mt24 alert alert-warning" style="display:none" role="alert"/>
+                    </t>
+                    <button class="o_hr_attendance_button_dismiss btn btn-primary btn-lg">
+                        <span class="text-capitalize">OK</span>
+                    </button>
+                </t>
+                <t t-else="">
+                    <div class="alert alert-warning" role="alert">Invalid request, please return to the main menu.</div>
+                    <button class="o_hr_attendance_button_dismiss btn btn-secondary btn-lg">Go back</button>
+                </t>
+            </div>
+        </div>
+    </t>
+
+    <t t-extend="HrAttendanceKioskMode">
+        <t t-jquery="h2" t-operation="before">
+            <h1>Registro Comedor</h1>
+        </t>
+    </t>
+
+</templates>
